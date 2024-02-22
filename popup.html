@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="content.js"></script>
+    <style>
+      body {
+        width: 300px;
+        height: 250px;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .popup {
+        width: 280px
+      }
+
+      .label {
+        font-size: 16px;
+        margin-top: 20px;
+      }
+
+      textarea {
+        width: 100%;
+        height: 200px;
+        padding: 0;
+        margin: 0;
+      }
+
+      button {
+        float: right;
+        margin: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="popup">
+        <div>
+            <div class="label">Paste the markedown for a table:</div>
+            <textarea id="textarea"></textarea>
+            <button>Submit</button>
+        </div>
+    </div>
+  </body>
+</html>
