@@ -4,17 +4,60 @@
     <script src="content.js"></script>
     <style>
       body {
-        width: 200px;
-        height: 100px;
+        width: 240px;
+        height: 120px;
         margin: 0;
         padding: 0;
+      }
+
+      .max-bet {
+        margin-top: 12px;
+        margin-left: 10px;
+      }
+
+      .max-bet input {
+        padding: 0;
+        margin: 0;
+        width: 60px;
+        vertical-align: middle;
+        display: inline-block
+      }
+
+      .info-outer {
+        padding: 0;
+        background: #6c757d;
+        width: 14px;
+        height: 14px;
+        border-radius: 14px;
+        color:  white;
+        display: inline-block;
+      }
+
+      .info-inner {
+        display: block;
+        text-align: center;
+        line-height: 14px;;
+      }
+
+      .place-bets {
+        margin-left: 10px;
+      }
+
+      .place-bets input {
+        vertical-align: middle;
+      }
+
+      hr {
+        width: 200px;
+      }
+
+      .copy-bets {
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-      }
-
-      .popup {
-        width: 280px
+        margin-top: 12px;
+        margin-bottom: 8px;
       }
 
       button {
@@ -30,6 +73,15 @@
     </style>
   </head>
   <body>
-    <button>Place Bets</button>
+    <div class="max-bet">
+      Override Max Bet <div class="info-outer"><b class="info-inner">?</b></div> : 
+      <input placeholder="Optional" id="max-bet-override"></input>
+    </div>
+    <div class="place-bets">
+      Place Bets <div class="info-outer"><b class="info-inner">?</b></div> :
+      <input type="checkbox" id="place-bets"></input>
+    </div>
+    <hr></hr>
+    <div class="copy-bets" id="copy-bets"><button>Copy Bets</button></div>
   </body>
 </html>
