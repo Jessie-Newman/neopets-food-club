@@ -5,17 +5,16 @@
     <style>
       body {
         width: 240px;
-        height: 120px;
         margin: 0;
         padding: 0;
       }
 
-      .max-bet {
+      .bet-amount {
         margin-top: 12px;
         margin-left: 10px;
       }
 
-      .max-bet input {
+      .bet-amount input {
         padding: 0;
         margin: 0;
         width: 60px;
@@ -28,6 +27,7 @@
         background: #6c757d;
         width: 14px;
         height: 14px;
+        border: 0;
         border-radius: 14px;
         color:  white;
         display: inline-block;
@@ -47,6 +47,12 @@
         vertical-align: middle;
       }
 
+      .help {
+        width: 200px;
+        margin: 8px 12px 12px;
+        color: #6c757d;
+      }
+
       hr {
         width: 200px;
       }
@@ -57,10 +63,9 @@
         align-items: center;
         justify-content: center;
         margin-top: 12px;
-        margin-bottom: 8px;
       }
 
-      button {
+      .copy-bets button {
         padding: 10px 16px;
         font-size: 18px;
         line-height: 1.3333333;
@@ -70,18 +75,30 @@
         background-color: #5bc0de;
         border-color: #46b8da;
       }
+
+      .force-margin {
+        height: 20px;
+      }
     </style>
   </head>
   <body>
-    <div class="max-bet">
-      Override Max Bet <div class="info-outer"><b class="info-inner">?</b></div> : 
-      <input placeholder="Optional" id="max-bet-override"></input>
+    <div class="bet-amount">
+      Override Bet Amount <button id="bet-amount-help-button" class="info-outer"><b class="info-inner">?</b></button> : 
+      <input placeholder="Optional" id="bet-override"></input>
     </div>
     <div class="place-bets">
-      Place Bets <div class="info-outer"><b class="info-inner">?</b></div> :
+      Place Bets <button id="place-bets-help-button" class="info-outer"><b class="info-inner">?</b></button> :
       <input type="checkbox" id="place-bets"></input>
+    </div>
+    <div id="bet-amount-help-text" class="help" hidden>
+      By default, your bet will be set to the maximum NP you can bet.<br/>
+      To bet a different amount, indicate how many NP you would like to bet.
+    </div>
+    <div id="place-bets-help-text" class="help" hidden>
+      When Place Bet is checked, the bets will be placed automatically with no chance to verify they look correct.
     </div>
     <hr></hr>
     <div class="copy-bets" id="copy-bets"><button>Copy Bets</button></div>
+    <div class="force-margin"></div>
   </body>
 </html>

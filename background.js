@@ -38,21 +38,21 @@ function parseTable() {
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.command === "run") {
-        const maxBetOverride = request.maxBetOverride
+        const betOverride = request.betOverride
         const placeBets = request.placeBets
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             chrome.scripting.executeScript({
               target: {tabId: tabs[0].id},
               function: parseTable
             }, function(results) {
-              openTabs(results[0]['result'], maxBetOverride, placeBets)
+              openTabs(results[0]['result'], betOverride, placeBets)
             });
           });
         sendResponse({status: "success", message: "noice"});
     }
 });
 
-function openTabs(all_competitors, maxBetOverride, placeBets) {
+function openTabs(all_competitors, betOverride, placeBets) {
     all_competitors.map(competitors => {
         chrome.tabs.create({url: "https://www.neopets.com/pirates/foodclub.phtml?type=bet"}, function(tab) {
             chrome.tabs.onUpdated.addListener(function listener (tabId, info) {
@@ -61,7 +61,7 @@ function openTabs(all_competitors, maxBetOverride, placeBets) {
                     chrome.scripting.executeScript({
                         target: {tabId: tab.id},
                         func: populateBets,
-                        args: [competitors, maxBetOverride, placeBets]
+                        args: [competitors, betOverride, placeBets]
                     }).then(result => {
                         console.log('Script result:', result);
                     }).catch(error => {
@@ -73,11 +73,11 @@ function openTabs(all_competitors, maxBetOverride, placeBets) {
     });
 }
 
-function populateBets(competitors, maxBetOverride, placeBets) {
+function populateBets(competitors, betOverride, placeBets) {
     competitors.map(number => {
-        // If maxBet is not provided, we need to scrape it from the page
-        let maxBet = maxBetOverride
-        if (!maxBet) {
+        // If bet amount is not provided, we need to scrape it from the page
+        let betAmount = betOverride
+        if (!betAmount) {
             Array.from(document.querySelectorAll('.content p')).map((p) => {
                 if (p.textContent.startsWith("You can only place up to")) {
                     maxBet = p.querySelector('b').textContent
@@ -85,9 +85,9 @@ function populateBets(competitors, maxBetOverride, placeBets) {
             })
         }
             
-        // Set maxBet 
-        const maxBetInput = document.querySelectorAll('.content form table')[1].querySelector('input')
-        maxBetInput.value = maxBet
+        // Set betAmount 
+        const betInput = document.querySelectorAll('.content form table')[1].querySelector('input')
+        betInput.value = maxBet
 
         // Set competitors
         const table = document.querySelector('.content form table')
